@@ -39,7 +39,6 @@ transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="gradedisplay" parent="." instance=ExtResource( 8 )]
-margin_right = 481.42
 
 [node name="hitbar" parent="." instance=ExtResource( 9 )]
 
