@@ -9,6 +9,7 @@ var clear = true
 
 onready var hitmeter = self.get_node("../hitmeter/meter")
 onready var grader = self.get_node("../gradedisplay/Sprite")
+onready var hitbar = self.get_node("../hitbar/ColorRect2")
 
 onready var level = 0
 onready var floatLevel = 0.0
@@ -60,6 +61,8 @@ onready var mapWidth = 5 #the width of the map
 
 onready var gameMap = [] #map of blocks that can be destroyed
 onready var damageMap = [] #map of damage to blocks that can be destroyed
+
+onready var weTesting = true #true means that settings for testing on desktop are enabled
 
 
 # Called when the node enters the scene tree for the first time.
@@ -203,15 +206,16 @@ func handle_touch(fingers):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _input(event):
+	var line = hitbar.rect_position.y #touching below this line enters commands, touching above submits the chain
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			runningClear = false
-			if event.index==0 && event.position.y>1000:
+			if event.index==0 && event.position.y>line:
 				#this means a new set of touches is happening, so reset touches
 				runningIndex = 1
-			elif event.position.y>1000:
+			elif event.position.y>line:
 				runningIndex+=1
-			if event.position.y<1000 && notesCleared == level && level >0:
+			if event.position.y<line && notesCleared == level && level >0:
 				#change grade depending on position
 				handle_grader(hitmeter.rect_position.x-503)
 			#else:
@@ -275,7 +279,11 @@ func _process(delta):
 		#label.text = ""
 		for i in range(level):
 			var inst = notescene.instance()
-			var skin = randi()%5+1
+			var skin;
+			if (weTesting):
+				skin = 1
+			else:
+				skin = randi()%5+1
 			match skin:
 				1:
 					inst.texture = noteI
