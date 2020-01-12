@@ -1,0 +1,20 @@
+[gd_scene format=2]
+
+[node name="commandchain" type="CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_right = -1.0
+margin_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 540.0
+margin_top = 1023.0
+margin_right = 540.0
+margin_bottom = 1023.0
+rect_clip_content = true

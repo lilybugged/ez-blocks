@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="Camera" type="Camera" groups=[
+"Camera",
+]]
+transform = Transform( 1, 0, 0, 0, 0.631082, 0.775716, 0, -0.775716, 0.631082, 0, 7.61, 7.51 )
+current = true
+fov = 89.4
