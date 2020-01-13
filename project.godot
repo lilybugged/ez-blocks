@@ -19,6 +19,10 @@ config/name="ezblocks"
 run/main_scene="res://scenes/scene.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
 window/size/width=1080

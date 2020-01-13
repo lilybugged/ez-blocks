@@ -10,6 +10,7 @@ var clear = true
 onready var hitmeter = self.get_node("../hitmeter/meter")
 onready var grader = self.get_node("../gradedisplay/Sprite")
 onready var hitbar = self.get_node("../hitbar/ColorRect2")
+onready var hitbox = self.get_node("../hitbox/Sprite")
 
 onready var level = 0
 onready var floatLevel = 0.0
@@ -50,24 +51,27 @@ onready var label = self.get_node("../exp")
 onready var gradeTimer = -1
 
 onready var canWalk = true #false means that the character is dancing, so you can't move
-onready var currentTrack = 1 #the index of the current song, which changes when the last song ends
+onready var currentTrack = 0 #the index of the current song, which changes when the last song ends
 
-onready var songs = [load("res://audio/weirddream.ogg"),load("res://audio/wavy.ogg")]
-onready var bpms = [128,128]
+onready var songs = [load("res://audio/jrawly.ogg"), load("res://audio/weirddream.ogg"),load("res://audio/wavy.ogg")]
+onready var bpms = [110.0,128.0,128.0]
 onready var accumulation = 0.5 #the rate at which the player ascends levels
 
 onready var experience = 0 #the actual exp of the user
 onready var mapWidth = 5 #the width of the map
+onready var mapSize = 50 #the width of the map
 
 onready var gameMap = [] #map of blocks that can be destroyed
 onready var damageMap = [] #map of damage to blocks that can be destroyed
 
 onready var weTesting = true #true means that settings for testing on desktop are enabled
 
+onready var step=0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	audioplayer.stream = songs[1]
+	audioplayer.stream = songs[currentTrack]
 	audioplayer.play()
 	
 	label.text = "exp: 0"
@@ -75,7 +79,7 @@ func _ready():
 	#initialize the map
 	
 	
-	for i in range(50):
+	for i in range(mapSize):
 		var num = randi()%10
 		var newMesh = MeshInstance.new()
 
@@ -112,14 +116,16 @@ func dig(damage):
 	#print("damage: "+str(damage))
 	
 	#TODO: fix which block gets deleted when gyroscope
-	var index = int(get_tree().get_nodes_in_group("player")[0].translation.x+(mapWidth/2.0)+((mapWidth*(get_tree().get_nodes_in_group("player")[0].translation.y-1)*-1)))
-	if (gameMap[index]!=null):
+	var index = int((get_tree().get_nodes_in_group("player")[0].translation.x/2)+(mapWidth/2.0)+(((mapWidth)*((get_tree().get_nodes_in_group("player")[0].translation.y-1)/2)*-1)))
+	if (index>=0 && index<gameMap.size() && gameMap[index]!=null):
 		damageMap[index] -= damage
 		if (damageMap[index]<=0):
 			gameMap[index].get_parent().remove_child(gameMap[index])
 			damageMap[index] = 0
-			get_tree().get_nodes_in_group("player")[0].translation.y-=1
-			get_tree().get_nodes_in_group("cam")[0].translation.y-=1
+			get_tree().get_nodes_in_group("player")[0].translation.y-=2
+			get_tree().get_nodes_in_group("cam")[0].translation.y-=2
+			self.get_node("../auger").translation.x = get_tree().get_nodes_in_group("player")[0].translation.x
+			self.get_node("../auger").translation.y = get_tree().get_nodes_in_group("player")[0].translation.y+0.1
 			print(get_tree().get_nodes_in_group("player")[0].translation.y)
 
 #called to clear the command chain early
@@ -135,28 +141,28 @@ func clearChain():
 #called to change the grader sprite
 func handle_grader(pos):
 	#pos is relative to center of the hitbar
-	if (pos>-5 && pos<5):
+	if (pos>-step && pos<step):
 		grader.texture = grade_perfect
 		runningChainClear = true
 		popplayer.play(0)
 		canWalk = false
 		experience+=level*400
 		dig(level*400)
-	elif (pos>-10 && pos<10):
+	elif (pos>step*-2 && pos<step*2):
 		grader.texture = grade_cool
 		runningChainClear = true
 		popplayer.play(0)
 		canWalk = false
 		experience+=level*300
 		dig(level*300)
-	elif (pos>-20 && pos<20):
+	elif (pos>step*-4 && pos<step*4):
 		grader.texture = grade_ok
 		runningChainClear = true
 		popplayer.play(0)
 		canWalk = false
 		experience+=level*200
 		dig(level*200)
-	elif (pos>-40 && pos<40):
+	elif (pos>step*-8 && pos<step*8):
 		grader.texture = grade_bad
 		runningChainClear = true
 		popplayer.play(0)
@@ -217,7 +223,7 @@ func _input(event):
 				runningIndex+=1
 			if event.position.y<line && notesCleared == level && level >0:
 				#change grade depending on position
-				handle_grader(hitmeter.rect_position.x-503)
+				handle_grader(hitmeter.rect_position.x-512)
 			#else:
 				#label.text = ""
 
@@ -237,18 +243,22 @@ func _process(delta):
 		handle_touch(runningIndex)
 		
 	#hitmeter
-	if (int(round(hitmeter.rect_position.x/(bpms[currentTrack]/4.0))*(bpms[currentTrack]/4))%(bpms[currentTrack]*2) == 0):
+	step = bpms[currentTrack]/60.0/60.0*256.0 #the number of pixels the hitmeter moves per frame
+	if (fmod(hitmeter.rect_position.x,256.0)<step):
 		hitmeter.rect_scale.x = 2
 		hitmeter.rect_scale.y = 2
+		hitbox.scale.x = 0.40
+		hitbox.scale.y = 0.40
 	else:
 		hitmeter.rect_scale.x = 1
 		hitmeter.rect_scale.y = 1
-		
-	hitmeter.rect_position.x += (bpms[currentTrack]/16)
+		hitbox.scale.x = 0.25
+		hitbox.scale.y = 0.25
+	hitmeter.rect_position.x += step
 	
 		#min 520
 		#max 592
-	if (int(hitmeter.rect_position.x)==(608/8)*((bpms[currentTrack]/16))):
+	if (fmod(hitmeter.rect_position.x,592)<step):
 		if (!runningChainClear&&level>0):
 			canWalk = true
 			grader.texture = grade_miss
@@ -259,7 +269,7 @@ func _process(delta):
 		sizeUpdate = true
 		runningChainClear = false
 	elif (hitmeter.rect_position.x > 1024):
-		hitmeter.rect_position.x = 0
+		hitmeter.rect_position.x = hitmeter.rect_position.x-1024
 		
 	#chain
 	if (level == 10):
@@ -333,14 +343,11 @@ func _process(delta):
 	
 
 func _on_AudioStreamPlayer_finished():
-	if (currentTrack==0):
-		currentTrack+=1
-	else:
-		currentTrack = 0
+	currentTrack+=1
 	audioplayer.stream = songs[currentTrack]
 	audioplayer.play()
 	floatLevel = 0
-	experience+=2000
+	experience+=10000
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "boogie":
