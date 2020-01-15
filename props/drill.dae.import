@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/drill.dae-18886a8136d127fde67ccc12f3cfad67.scn"
+path="res://.import/drill.dae-592252a8fd31d5a98228799d0b59b927.scn"
 
 [deps]
 
-source_file="res://player/drill.dae"
-dest_files=[ "res://.import/drill.dae-18886a8136d127fde67ccc12f3cfad67.scn" ]
+source_file="res://props/drill.dae"
+dest_files=[ "res://.import/drill.dae-592252a8fd31d5a98228799d0b59b927.scn" ]
 
 [params]
 

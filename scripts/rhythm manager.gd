@@ -348,6 +348,7 @@ func _on_AudioStreamPlayer_finished():
 	audioplayer.play()
 	floatLevel = 0
 	experience+=10000
+	hitmeter.rect_position.x = 0
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "boogie":
