@@ -68,6 +68,8 @@ onready var weTesting = true #true means that settings for testing on desktop ar
 
 onready var step=0
 
+onready var MAX_LEVEL = 20 #value is the maximum level we are allowed to increment to before resetting.
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -112,10 +114,6 @@ func _ready():
 
 #called to dig by moving the player and/or damaging/removing blocks
 func dig(damage):
-	#print(int(get_tree().get_nodes_in_group("player")[0].translation.x+(mapWidth/2.0)+((mapWidth*(get_tree().get_nodes_in_group("player")[0].translation.y-1)*-1))))
-	#print("damage: "+str(damage))
-	
-	#TODO: fix which block gets deleted when gyroscope
 	var index = int((get_tree().get_nodes_in_group("player")[0].translation.x/2)+(mapWidth/2.0)+(((mapWidth)*((get_tree().get_nodes_in_group("player")[0].translation.y-1)/2)*-1)))
 	if (index>=0 && index<gameMap.size() && gameMap[index]!=null):
 		damageMap[index] -= damage
@@ -124,8 +122,8 @@ func dig(damage):
 			damageMap[index] = 0
 			get_tree().get_nodes_in_group("player")[0].translation.y-=2
 			get_tree().get_nodes_in_group("cam")[0].translation.y-=2
-			self.get_node("../auger").translation.x = get_tree().get_nodes_in_group("player")[0].translation.x
-			self.get_node("../auger").translation.y = get_tree().get_nodes_in_group("player")[0].translation.y+0.1
+			self.get_node("../zone1/auger").translation.x = get_tree().get_nodes_in_group("player")[0].translation.x
+			self.get_node("../zone1/auger").translation.y = get_tree().get_nodes_in_group("player")[0].translation.y+0.1
 			print(get_tree().get_nodes_in_group("player")[0].translation.y)
 
 #called to clear the command chain early
@@ -148,6 +146,7 @@ func handle_grader(pos):
 		canWalk = false
 		experience+=level*400
 		dig(level*400)
+		postHit("+EXP HIT "+str(level*400))
 	elif (pos>step*-2 && pos<step*2):
 		grader.texture = grade_cool
 		runningChainClear = true
@@ -155,6 +154,7 @@ func handle_grader(pos):
 		canWalk = false
 		experience+=level*300
 		dig(level*300)
+		postHit("+EXP HIT "+str(level*300))
 	elif (pos>step*-4 && pos<step*4):
 		grader.texture = grade_ok
 		runningChainClear = true
@@ -162,6 +162,7 @@ func handle_grader(pos):
 		canWalk = false
 		experience+=level*200
 		dig(level*200)
+		postHit("+EXP HIT "+str(level*200))
 	elif (pos>step*-8 && pos<step*8):
 		grader.texture = grade_bad
 		runningChainClear = true
@@ -169,6 +170,7 @@ func handle_grader(pos):
 		canWalk = false
 		experience+=level*100
 		dig(level*100)
+		postHit("+EXP HIT "+str(level*100))
 	else:
 		grader.texture = grade_miss
 		runningChainClear = true
@@ -209,8 +211,7 @@ func handle_touch(fingers):
 						runningIndex = 0
 						kickplayer.play(0)
 		
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _input(event):
 	var line = hitbar.rect_position.y #touching below this line enters commands, touching above submits the chain
 	if event is InputEventScreenTouch:
@@ -227,10 +228,18 @@ func _input(event):
 			#else:
 				#label.text = ""
 
+func postHit(string):
+	var txt = (load("res://prefabs/statusTextInstance.tscn")).instance()
+	txt.get_node("text").text = string
+	get_parent().add_child(txt)
+	
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
 	#update experience label
 	label.text = "exp: "+str(experience)
+	
 	
 	#handle grade
 	if gradeTimer==0:
@@ -303,6 +312,8 @@ func _process(delta):
 					inst.texture = noteIII
 				4:
 					inst.texture = noteIV
+			inst.set_custom_minimum_size(Vector2(150+(100/MAX_LEVEL)*MAX_LEVEL/level, 150+(100/MAX_LEVEL)*MAX_LEVEL/level))
+			inst.set_custom_minimum_size(Vector2(150, 150))
 			chain.add_child(inst)
 			notes.append(inst)
 		
@@ -344,11 +355,14 @@ func _process(delta):
 
 func _on_AudioStreamPlayer_finished():
 	currentTrack+=1
+	if (currentTrack>2):
+		currentTrack = 0
 	audioplayer.stream = songs[currentTrack]
 	audioplayer.play()
 	floatLevel = 0
 	experience+=10000
 	hitmeter.rect_position.x = 0
+	postHit("END OF SONG!!\n+EXP BONUS "+str(10000))
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "boogie":

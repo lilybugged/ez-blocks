@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fonts/xolonium/Xolonium.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/statusText.gd" type="Script" id=2]
+
+[node name="statusTextInstance" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="text" type="Label" parent="."]
+margin_left = -60.1599
+margin_top = 100.0
+margin_right = 1047.84
+margin_bottom = 924.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.0666667, 0.027451, 0.133333, 1 )
+custom_constants/shadow_offset_x = -4
+text = "+SONG START"
+align = 2
+valign = 2
+script = ExtResource( 2 )

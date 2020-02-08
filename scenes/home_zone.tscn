@@ -59,6 +59,7 @@ autoplay = false
 [node name="rhythm manager" parent="." instance=ExtResource( 5 )]
 
 [node name="player" parent="." instance=ExtResource( 6 )]
+editor/display_folded = true
 
 [node name="gradedisplay" parent="." groups=[
 "grade",
