@@ -68,7 +68,12 @@ onready var weTesting = true #true means that settings for testing on desktop ar
 
 onready var step=0
 
-onready var MAX_LEVEL = 20 #value is the maximum level we are allowed to increment to before resetting.
+onready var MAX_LEVEL = 12 #value is the maximum level we are allowed to increment to before resetting.
+
+onready var rankPNGs = [load("res://noteskin/blank.png"),load("res://ranks/rank_private.png"),load("res://ranks/rank_corporal.png"),load("res://ranks/rank_sargeant.png")]
+onready var rank = 0
+onready var rankReqs = [0,10000,20000,30000]
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -146,7 +151,8 @@ func handle_grader(pos):
 		canWalk = false
 		experience+=level*400
 		dig(level*400)
-		postHit("+EXP HIT "+str(level*400))
+		if (!(experience>=rankReqs[rank+1])):
+			postStatus("+EXP HIT "+str(level*400))
 	elif (pos>step*-2 && pos<step*2):
 		grader.texture = grade_cool
 		runningChainClear = true
@@ -154,7 +160,8 @@ func handle_grader(pos):
 		canWalk = false
 		experience+=level*300
 		dig(level*300)
-		postHit("+EXP HIT "+str(level*300))
+		if (!(experience>=rankReqs[rank+1])):
+			postStatus("+EXP HIT "+str(level*300))
 	elif (pos>step*-4 && pos<step*4):
 		grader.texture = grade_ok
 		runningChainClear = true
@@ -162,7 +169,8 @@ func handle_grader(pos):
 		canWalk = false
 		experience+=level*200
 		dig(level*200)
-		postHit("+EXP HIT "+str(level*200))
+		if (!(experience>=rankReqs[rank+1])):
+			postStatus("+EXP HIT "+str(level*200))
 	elif (pos>step*-8 && pos<step*8):
 		grader.texture = grade_bad
 		runningChainClear = true
@@ -170,7 +178,8 @@ func handle_grader(pos):
 		canWalk = false
 		experience+=level*100
 		dig(level*100)
-		postHit("+EXP HIT "+str(level*100))
+		if (!(experience>=rankReqs[rank+1])):
+			postStatus("+EXP HIT "+str(level*100))
 	else:
 		grader.texture = grade_miss
 		runningChainClear = true
@@ -228,7 +237,7 @@ func _input(event):
 			#else:
 				#label.text = ""
 
-func postHit(string):
+func postStatus(string):
 	var txt = (load("res://prefabs/statusTextInstance.tscn")).instance()
 	txt.get_node("text").text = string
 	get_parent().add_child(txt)
@@ -237,9 +246,15 @@ func postHit(string):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
+	#update rank, exp
+	if (experience >= rankReqs[rank+1]):
+		rank+=1
+		self.get_node("../rankdisplay/rank").texture = rankPNGs[rank]
+		experience = 0
+		postStatus("RANK UP!!")
+	
 	#update experience label
 	label.text = "exp: "+str(experience)
-	
 	
 	#handle grade
 	if gradeTimer==0:
@@ -252,7 +267,7 @@ func _process(delta):
 		handle_touch(runningIndex)
 		
 	#hitmeter
-	step = bpms[currentTrack]/60.0/60.0*256.0 #the number of pixels the hitmeter moves per frame
+	step = (delta*((bpms[currentTrack]/60.0)*256.0)) #the number of pixels the hitmeter moves per frame
 	if (fmod(hitmeter.rect_position.x,256.0)<step):
 		hitmeter.rect_scale.x = 2
 		hitmeter.rect_scale.y = 2
@@ -281,8 +296,8 @@ func _process(delta):
 		hitmeter.rect_position.x = hitmeter.rect_position.x-1024
 		
 	#chain
-	if (level == 10):
-		floatLevel = 1
+	if (level == MAX_LEVEL):
+		floatLevel = MAX_LEVEL/2
 		level = int(floatLevel)
 		sizeUpdate = true
 		
@@ -295,7 +310,7 @@ func _process(delta):
 		notesCleared = 0
 		runningIndex = 0
 		runningClear = true
-		#label.text = ""
+		self.get_node("../levelDisplay/text").text = "LEVEL "+str(level)
 		for i in range(level):
 			var inst = notescene.instance()
 			var skin;
@@ -312,8 +327,11 @@ func _process(delta):
 					inst.texture = noteIII
 				4:
 					inst.texture = noteIV
-			inst.set_custom_minimum_size(Vector2(150+(100/MAX_LEVEL)*MAX_LEVEL/level, 150+(100/MAX_LEVEL)*MAX_LEVEL/level))
-			inst.set_custom_minimum_size(Vector2(150, 150))
+			if (level<=6):
+				inst.set_custom_minimum_size(Vector2(150, 150))
+			else:
+				inst.set_custom_minimum_size(Vector2(900/level, 900/level))
+			#inst.set_custom_minimum_size(Vector2(150, 150))
 			chain.add_child(inst)
 			notes.append(inst)
 		
@@ -362,7 +380,7 @@ func _on_AudioStreamPlayer_finished():
 	floatLevel = 0
 	experience+=10000
 	hitmeter.rect_position.x = 0
-	postHit("END OF SONG!!\n+EXP BONUS "+str(10000))
+	postStatus("END OF SONG!!\n+EXP BONUS "+str(10000))
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "boogie":

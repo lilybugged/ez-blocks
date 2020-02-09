@@ -1,17 +1,21 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://noteskin/blank.png" type="Texture" id=1]
+[ext_resource path="res://noteskin/grade_ok.png" type="Texture" id=1]
 
-[node name="gradedisplay" type="Container"]
+[node name="gradedisplay" type="CenterContainer"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -598.58
-margin_top = -920.947
-margin_right = 481.42
-margin_bottom = 999.053
+margin_left = -540.0
+margin_top = -960.0
+margin_right = 540.0
+margin_bottom = 771.0
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 715.806, 845.222 )
+[node name="Sprite" type="TextureRect" parent="."]
+margin_left = 390.0
+margin_top = 790.0
+margin_right = 690.0
+margin_bottom = 940.0
 texture = ExtResource( 1 )
+stretch_mode = 4
