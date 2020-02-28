@@ -10,7 +10,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	self.rect_position.y-=1
+	self.rect_position.y+=1
 	self.add_color_override("font_color", Color(1,1,1,(opacity/255.0)))
 	self.add_color_override("font_color_shadow", Color(17/255.0,7/255.0,34/255.0,(opacity/255.0)))
 	opacity-=1

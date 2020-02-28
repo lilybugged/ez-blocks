@@ -269,15 +269,15 @@ func _process(delta):
 	#hitmeter
 	step = (delta*((bpms[currentTrack]/60.0)*256.0)) #the number of pixels the hitmeter moves per frame
 	if (fmod(hitmeter.rect_position.x,256.0)<step):
-		hitmeter.rect_scale.x = 2
-		hitmeter.rect_scale.y = 2
-		hitbox.scale.x = 0.40
-		hitbox.scale.y = 0.40
-	else:
 		hitmeter.rect_scale.x = 1
 		hitmeter.rect_scale.y = 1
-		hitbox.scale.x = 0.25
-		hitbox.scale.y = 0.25
+		hitbox.rect_min_size.x = 59
+		hitbox.rect_min_size.y = 50
+	else:
+		hitmeter.rect_scale.x = .5
+		hitmeter.rect_scale.y = .5
+		hitbox.rect_min_size.x = 25
+		hitbox.rect_min_size.y = 25
 	hitmeter.rect_position.x += step
 	
 		#min 520

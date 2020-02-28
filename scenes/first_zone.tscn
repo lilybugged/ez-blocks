@@ -1,41 +1,48 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://prefabs/kickplayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/popplayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://prefabs/domasticstream.tscn" type="PackedScene" id=3]
 [ext_resource path="res://env/default_env.tres" type="Environment" id=4]
-[ext_resource path="res://prefabs/exp.tscn" type="PackedScene" id=5]
-[ext_resource path="res://fonts/xolonium/Xolonium.tres" type="DynamicFont" id=6]
-[ext_resource path="res://prefabs/rhythm manager.tscn" type="PackedScene" id=7]
-[ext_resource path="res://player/player.tscn" type="PackedScene" id=8]
-[ext_resource path="res://prefabs/hitbar.tscn" type="PackedScene" id=9]
-[ext_resource path="res://prefabs/hitbox.tscn" type="PackedScene" id=10]
-[ext_resource path="res://prefabs/commandchain.tscn" type="PackedScene" id=11]
-[ext_resource path="res://prefabs/hitmeter.tscn" type="PackedScene" id=12]
-[ext_resource path="res://noteskin/blank.png" type="Texture" id=13]
-[ext_resource path="res://ui/hamburger menu.png" type="Texture" id=14]
-[ext_resource path="res://ui/hamburger menu open.png" type="Texture" id=15]
-[ext_resource path="res://ui/icon_map.png" type="Texture" id=16]
-[ext_resource path="res://ui/icon_chest.png" type="Texture" id=17]
-[ext_resource path="res://ui/icon_home.png" type="Texture" id=18]
-[ext_resource path="res://ui/icon_shop.png" type="Texture" id=19]
-[ext_resource path="res://prefabs/statusTextInstance.tscn" type="PackedScene" id=20]
-[ext_resource path="res://inventory_texture.png" type="Texture" id=21]
-[ext_resource path="res://ore.png" type="Texture" id=22]
-[ext_resource path="res://map_texture.png" type="Texture" id=23]
-[ext_resource path="res://house.png" type="Texture" id=24]
-[ext_resource path="res://prefabs/sun.tscn" type="PackedScene" id=25]
-[ext_resource path="res://prefabs/Camera.tscn" type="PackedScene" id=26]
-[ext_resource path="res://props/fence.obj" type="ArrayMesh" id=27]
-[ext_resource path="res://props/Material_004.material" type="Material" id=28]
-[ext_resource path="res://characters/boss1.dae" type="PackedScene" id=29]
-[ext_resource path="res://scripts/boss1.gd" type="Script" id=30]
-[ext_resource path="res://props/drill.dae" type="PackedScene" id=31]
-[ext_resource path="res://props/auger.dae" type="PackedScene" id=32]
-[ext_resource path="res://scripts/auger.gd" type="Script" id=33]
-[ext_resource path="res://prefabs/gradedisplay.tscn" type="PackedScene" id=34]
+[ext_resource path="res://noteskin/pixel.png" type="Texture" id=5]
+[ext_resource path="res://noteskin/triangle_right.png" type="Texture" id=6]
+[ext_resource path="res://noteskin/triangle_left.png" type="Texture" id=7]
+[ext_resource path="res://prefabs/exp.tscn" type="PackedScene" id=8]
+[ext_resource path="res://fonts/xolonium/Xolonium.tres" type="DynamicFont" id=9]
+[ext_resource path="res://prefabs/statusTextInstance.tscn" type="PackedScene" id=10]
+[ext_resource path="res://noteskin/blank.png" type="Texture" id=11]
+[ext_resource path="res://prefabs/gradedisplay.tscn" type="PackedScene" id=12]
+[ext_resource path="res://prefabs/rhythm manager.tscn" type="PackedScene" id=13]
+[ext_resource path="res://new rhythm manager.gd" type="Script" id=14]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=15]
+[ext_resource path="res://prefabs/hitbar.tscn" type="PackedScene" id=16]
+[ext_resource path="res://prefabs/hitbox.tscn" type="PackedScene" id=17]
+[ext_resource path="res://prefabs/commandchain.tscn" type="PackedScene" id=18]
+[ext_resource path="res://prefabs/hitmeter.tscn" type="PackedScene" id=19]
+[ext_resource path="res://noteskin/gear.png" type="Texture" id=20]
+[ext_resource path="res://ui/hamburger menu open.png" type="Texture" id=21]
+[ext_resource path="res://ui/icon_map.png" type="Texture" id=22]
+[ext_resource path="res://ui/icon_chest.png" type="Texture" id=23]
+[ext_resource path="res://ui/icon_home.png" type="Texture" id=24]
+[ext_resource path="res://ui/icon_shop.png" type="Texture" id=25]
+[ext_resource path="res://inventory_texture.png" type="Texture" id=26]
+[ext_resource path="res://ore.png" type="Texture" id=27]
+[ext_resource path="res://map_texture.png" type="Texture" id=28]
+[ext_resource path="res://house.png" type="Texture" id=29]
+[ext_resource path="res://prefabs/sun.tscn" type="PackedScene" id=30]
+[ext_resource path="res://prefabs/Camera.tscn" type="PackedScene" id=31]
+[ext_resource path="res://props/fence.obj" type="ArrayMesh" id=32]
+[ext_resource path="res://props/Material_004.material" type="Material" id=33]
+[ext_resource path="res://characters/boss1.dae" type="PackedScene" id=34]
+[ext_resource path="res://scripts/boss1.gd" type="Script" id=35]
+[ext_resource path="res://props/drill.dae" type="PackedScene" id=36]
+[ext_resource path="res://props/auger.dae" type="PackedScene" id=37]
+[ext_resource path="res://scripts/auger.gd" type="Script" id=38]
 
 [node name="Spatial" type="Spatial"]
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
 
 [node name="kickplayer" parent="." instance=ExtResource( 1 )]
 
@@ -46,114 +53,291 @@
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 4 )
 
-[node name="exp" parent="." instance=ExtResource( 5 )]
+[node name="sliders" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="sliders"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 36.0
+color = Color( 0.603922, 0.435294, 0.435294, 0.0313726 )
+
+[node name="Control" type="Control" parent="sliders/ColorRect"]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -104.88
-margin_top = -6.50757
-margin_right = 975.115
-margin_bottom = 1913.49
+anchor_bottom = 0.5
+margin_left = -475.0
+margin_top = -413.0
+margin_right = 475.0
+margin_bottom = 413.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="sliders/ColorRect/Control"]
+editor/display_folded = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -400.0
+margin_top = -356.0
+margin_right = 401.0
+margin_bottom = 358.0
+grow_horizontal = 2
+custom_constants/separation = 174
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="sliders/ColorRect/Control/HBoxContainer2"]
+margin_right = 21.0
+margin_bottom = 714.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 15, 32 )
+size_flags_horizontal = 3
+
+[node name="ColorRect2" type="ColorRect" parent="sliders/ColorRect/Control/HBoxContainer2"]
+margin_left = 195.0
+margin_right = 216.0
+margin_bottom = 714.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 15, 32 )
+size_flags_horizontal = 3
+
+[node name="ColorRect5" type="ColorRect" parent="sliders/ColorRect/Control/HBoxContainer2"]
+margin_left = 390.0
+margin_right = 411.0
+margin_bottom = 714.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 15, 32 )
+size_flags_horizontal = 3
+color = Color( 1, 1, 1, 0 )
+
+[node name="ColorRect3" type="ColorRect" parent="sliders/ColorRect/Control/HBoxContainer2"]
+margin_left = 585.0
+margin_right = 606.0
+margin_bottom = 714.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 15, 32 )
+size_flags_horizontal = 3
+
+[node name="ColorRect4" type="ColorRect" parent="sliders/ColorRect/Control/HBoxContainer2"]
+margin_left = 780.0
+margin_right = 801.0
+margin_bottom = 714.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 15, 32 )
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="sliders/ColorRect/Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -397.5
+margin_top = -353.5
+margin_right = 397.5
+margin_bottom = 353.5
+grow_horizontal = 2
+custom_constants/separation = 180
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="sliders/ColorRect/Control/HBoxContainer"]
+margin_right = 15.0
+margin_bottom = 707.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 15, 32 )
+size_flags_horizontal = 3
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="sliders/ColorRect/Control/HBoxContainer"]
+margin_left = 195.0
+margin_right = 210.0
+margin_bottom = 707.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 15, 32 )
+size_flags_horizontal = 3
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="sliders/ColorRect/Control/HBoxContainer"]
+margin_left = 390.0
+margin_right = 405.0
+margin_bottom = 707.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 15, 32 )
+size_flags_horizontal = 3
+color = Color( 1, 1, 1, 0 )
+
+[node name="ColorRect3" type="ColorRect" parent="sliders/ColorRect/Control/HBoxContainer"]
+margin_left = 585.0
+margin_right = 600.0
+margin_bottom = 707.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 15, 32 )
+size_flags_horizontal = 3
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="sliders/ColorRect/Control/HBoxContainer"]
+margin_left = 780.0
+margin_right = 795.0
+margin_bottom = 707.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 15, 32 )
+size_flags_horizontal = 3
+color = Color( 0, 0, 0, 1 )
+
+[node name="colors" type="Control" parent="."]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="colors"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -31.0
+margin_bottom = 31.0
+grow_horizontal = 2
+rect_min_size = Vector2( 0, 50 )
+split_offset = 25
+
+[node name="target color" type="ColorRect" parent="colors/VSplitContainer"]
+margin_right = 1080.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+color = Color( 1, 0, 0, 1 )
+
+[node name="user color" type="ColorRect" parent="colors/VSplitContainer"]
+margin_top = 37.0
+margin_right = 1080.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 0, 25 )
+color = Color( 1, 0.631373, 0, 1 )
+
+[node name="Control" type="Control" parent="colors"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 15
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="colors/Control"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_bottom = 7.0
+rect_min_size = Vector2( 0, 14 )
+size_flags_horizontal = 15
+
+[node name="ColorRect" type="ColorRect" parent="colors/Control/VBoxContainer"]
+margin_right = 1080.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 0, 14 )
+
+[node name="Control2" type="Control" parent="colors"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+
+[node name="NinePatchRect" type="NinePatchRect" parent="colors/Control2"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 64 )
+texture = ExtResource( 5 )
+draw_center = false
+patch_margin_top = 2
+patch_margin_bottom = 2
+
+[node name="triangles" type="Control" parent="."]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="left" type="Control" parent="triangles"]
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="triangles/left"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+rect_scale = Vector2( 0.25, 1 )
+texture = ExtResource( 6 )
+
+[node name="right" type="Control" parent="triangles"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="triangles/right"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 0 )
+rect_scale = Vector2( 0.25, 1 )
+rect_pivot_offset = Vector2( 100, 0 )
+texture = ExtResource( 7 )
+
+[node name="frame" type="Control" parent="."]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="frame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+draw_center = false
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="oldUI" type="Control" parent="."]
+visible = false
+margin_left = 435.12
+margin_top = -7.73529
+margin_right = 475.12
+margin_bottom = 32.2647
+
+[node name="exp" parent="." instance=ExtResource( 8 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 15.0
+margin_right = 0.0
+margin_bottom = 0.0
 rect_scale = Vector2( 1, 1 )
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0.0392157, 0.0156863, 0.0745098, 1 )
 custom_constants/shadow_offset_y = 4
-
-[node name="rhythm manager" parent="." instance=ExtResource( 7 )]
-
-[node name="player" parent="." instance=ExtResource( 8 )]
-editor/display_folded = true
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1, 0 )
-
-[node name="Armature" parent="player" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-
-[node name="hitbar" parent="." instance=ExtResource( 9 )]
-
-[node name="hitbox" parent="." instance=ExtResource( 10 )]
-
-[node name="commandchain" parent="." instance=ExtResource( 11 )]
-margin_left = 0.0
-margin_top = 62.48
-margin_right = 0.0
-margin_bottom = 188.482
-
-[node name="hitmeter" parent="." instance=ExtResource( 12 )]
-
-[node name="rankdisplay" type="Control" parent="."]
-editor/display_folded = true
-margin_right = 1080.0
-margin_bottom = 1920.0
-
-[node name="rank" type="TextureRect" parent="rankdisplay"]
-margin_left = 3.74101
-margin_top = 15.8926
-margin_right = 219.741
-margin_bottom = 231.893
-texture = ExtResource( 13 )
-
-[node name="menu" type="Control" parent="."]
-editor/display_folded = true
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -1080.0
-margin_top = -0.0680237
-margin_bottom = 1919.93
-
-[node name="hamburger" type="TextureRect" parent="menu"]
-margin_left = 943.607
-margin_top = 26.7229
-margin_right = 1051.61
-margin_bottom = 134.723
-texture = ExtResource( 14 )
-
-[node name="buttons" type="Control" parent="menu"]
-editor/display_folded = true
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="menu/buttons"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = 906.0
-margin_top = 31.0
-margin_right = 1014.0
-margin_bottom = 264.0
-
-[node name="TextureRect" type="TextureRect" parent="menu/buttons/VBoxContainer"]
-margin_right = 108.0
-margin_bottom = 108.0
-texture = ExtResource( 15 )
-
-[node name="TextureRect2" type="TextureRect" parent="menu/buttons/VBoxContainer"]
-margin_top = 112.0
-margin_right = 108.0
-margin_bottom = 220.0
-texture = ExtResource( 16 )
-
-[node name="TextureRect3" type="TextureRect" parent="menu/buttons/VBoxContainer"]
-margin_top = 224.0
-margin_right = 108.0
-margin_bottom = 332.0
-texture = ExtResource( 17 )
-
-[node name="TextureRect4" type="TextureRect" parent="menu/buttons/VBoxContainer"]
-margin_top = 336.0
-margin_right = 108.0
-margin_bottom = 444.0
-texture = ExtResource( 18 )
-
-[node name="TextureRect5" type="TextureRect" parent="menu/buttons/VBoxContainer"]
-margin_top = 448.0
-margin_right = 108.0
-margin_bottom = 556.0
-texture = ExtResource( 19 )
-
-[node name="statusTextInstance" parent="." instance=ExtResource( 20 )]
+align = 1
 
 [node name="levelDisplay" type="Control" parent="."]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -170,9 +354,109 @@ margin_left = 44.0211
 margin_top = -57.681
 margin_right = 44.0211
 margin_bottom = -57.681
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 text = "LEVEL 0"
 valign = 1
+
+[node name="statusTextInstance" parent="." instance=ExtResource( 10 )]
+
+[node name="rankdisplay" type="Control" parent="."]
+editor/display_folded = true
+margin_right = 1080.0
+margin_bottom = 1920.0
+
+[node name="rank" type="TextureRect" parent="rankdisplay"]
+margin_left = 3.74101
+margin_top = 15.8926
+margin_right = 219.741
+margin_bottom = 231.893
+texture = ExtResource( 11 )
+
+[node name="gradedisplay" parent="." instance=ExtResource( 12 )]
+visible = false
+
+[node name="rhythm manager" parent="." instance=ExtResource( 13 )]
+script = ExtResource( 14 )
+
+[node name="player" parent="." instance=ExtResource( 15 )]
+editor/display_folded = true
+transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1, 0 )
+
+[node name="Armature" parent="player" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="hitbar" parent="." instance=ExtResource( 16 )]
+
+[node name="hitbox" parent="." instance=ExtResource( 17 )]
+
+[node name="commandchain" parent="." instance=ExtResource( 18 )]
+margin_left = 0.0
+margin_top = 60.0884
+margin_right = 0.0
+margin_bottom = 186.09
+
+[node name="hitmeter" parent="." instance=ExtResource( 19 )]
+
+[node name="menu" type="Control" parent="."]
+editor/display_folded = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="hamburger" type="TextureRect" parent="menu"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -24.4885
+margin_top = 101.096
+margin_right = 83.5143
+margin_bottom = 209.097
+rect_rotation = 497.37
+texture = ExtResource( 20 )
+expand = true
+
+[node name="buttons" type="Control" parent="menu"]
+editor/display_folded = true
+visible = false
+margin_left = -19.75
+margin_top = 18.35
+margin_right = 20.25
+margin_bottom = 58.35
+
+[node name="VBoxContainer" type="VBoxContainer" parent="menu/buttons"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 906.0
+margin_top = 31.0
+margin_right = 1014.0
+margin_bottom = 264.0
+
+[node name="TextureRect" type="TextureRect" parent="menu/buttons/VBoxContainer"]
+margin_right = 108.0
+margin_bottom = 108.0
+texture = ExtResource( 21 )
+
+[node name="TextureRect2" type="TextureRect" parent="menu/buttons/VBoxContainer"]
+margin_top = 112.0
+margin_right = 108.0
+margin_bottom = 220.0
+texture = ExtResource( 22 )
+
+[node name="TextureRect3" type="TextureRect" parent="menu/buttons/VBoxContainer"]
+margin_top = 224.0
+margin_right = 108.0
+margin_bottom = 332.0
+texture = ExtResource( 23 )
+
+[node name="TextureRect4" type="TextureRect" parent="menu/buttons/VBoxContainer"]
+margin_top = 336.0
+margin_right = 108.0
+margin_bottom = 444.0
+texture = ExtResource( 24 )
+
+[node name="TextureRect5" type="TextureRect" parent="menu/buttons/VBoxContainer"]
+margin_top = 448.0
+margin_right = 108.0
+margin_bottom = 556.0
+texture = ExtResource( 25 )
 
 [node name="inventory" type="Control" parent="."]
 editor/display_folded = true
@@ -202,7 +486,7 @@ color = Color( 0.356863, 0.141176, 0.0666667, 1 )
 [node name="tiles" type="TextureRect" parent="inventory/base"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 21 )
+texture = ExtResource( 26 )
 stretch_mode = 2
 
 [node name="container" type="ColorRect" parent="inventory/base/tiles"]
@@ -227,7 +511,7 @@ margin_right = 819.0
 margin_bottom = 39.0
 rect_clip_content = true
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "INVENTORY"
 align = 1
@@ -242,7 +526,7 @@ split_offset = 4
 [node name="icon" type="TextureRect" parent="inventory/base/tiles/container/items/item"]
 margin_right = 132.0
 margin_bottom = 128.0
-texture = ExtResource( 22 )
+texture = ExtResource( 27 )
 
 [node name="description" type="Label" parent="inventory/base/tiles/container/items/item"]
 margin_left = 144.0
@@ -250,7 +534,7 @@ margin_right = 819.0
 margin_bottom = 128.0
 rect_clip_content = true
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 text = "aaaaaaaaaaaaaaaaaa"
 autowrap = true
 
@@ -263,7 +547,7 @@ split_offset = 4
 [node name="icon" type="TextureRect" parent="inventory/base/tiles/container/items/item2"]
 margin_right = 132.0
 margin_bottom = 128.0
-texture = ExtResource( 22 )
+texture = ExtResource( 27 )
 
 [node name="description" type="Label" parent="inventory/base/tiles/container/items/item2"]
 margin_left = 144.0
@@ -271,7 +555,7 @@ margin_right = 819.0
 margin_bottom = 128.0
 rect_clip_content = true
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 text = "asdasdasdas"
 autowrap = true
 
@@ -285,7 +569,7 @@ margin_right = 819.0
 margin_bottom = 39.0
 rect_clip_content = true
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 align = 1
 autowrap = true
 
@@ -302,7 +586,7 @@ margin_top = 1.0
 margin_right = 122.998
 margin_bottom = 129.0
 rect_min_size = Vector2( 128, 128 )
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 custom_colors/font_color_shadow = Color( 0.180392, 0.0117647, 0.407843, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -322,7 +606,7 @@ margin_top = 1.0
 margin_right = 122.998
 margin_bottom = 129.0
 rect_min_size = Vector2( 128, 128 )
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 custom_colors/font_color_shadow = Color( 0.180392, 0.0117647, 0.407843, 1 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 2
@@ -358,7 +642,7 @@ color = Color( 0.356863, 0.141176, 0.0666667, 1 )
 [node name="tiles" type="TextureRect" parent="map/base"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 23 )
+texture = ExtResource( 28 )
 stretch_mode = 2
 
 [node name="container" type="ColorRect" parent="map/base/tiles"]
@@ -383,7 +667,7 @@ margin_right = 819.0
 margin_bottom = 39.0
 rect_clip_content = true
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "MAP"
 align = 1
@@ -399,7 +683,7 @@ split_offset = 4
 [node name="icon" type="TextureRect" parent="map/base/tiles/container/zones/item"]
 margin_right = 132.0
 margin_bottom = 128.0
-texture = ExtResource( 24 )
+texture = ExtResource( 29 )
 
 [node name="description" type="Label" parent="map/base/tiles/container/zones/item"]
 margin_left = 144.0
@@ -407,7 +691,7 @@ margin_right = 819.0
 margin_bottom = 128.0
 rect_clip_content = true
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 text = "zone 1"
 autowrap = true
 
@@ -421,7 +705,7 @@ split_offset = 4
 [node name="icon" type="TextureRect" parent="map/base/tiles/container/zones/item2"]
 margin_right = 132.0
 margin_bottom = 128.0
-texture = ExtResource( 24 )
+texture = ExtResource( 29 )
 
 [node name="description" type="Label" parent="map/base/tiles/container/zones/item2"]
 margin_left = 144.0
@@ -429,7 +713,7 @@ margin_right = 819.0
 margin_bottom = 128.0
 rect_clip_content = true
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 text = "zone 2"
 autowrap = true
 
@@ -443,7 +727,7 @@ split_offset = 4
 [node name="icon" type="TextureRect" parent="map/base/tiles/container/zones/item3"]
 margin_right = 132.0
 margin_bottom = 128.0
-texture = ExtResource( 24 )
+texture = ExtResource( 29 )
 
 [node name="description" type="Label" parent="map/base/tiles/container/zones/item3"]
 margin_left = 144.0
@@ -451,7 +735,7 @@ margin_right = 819.0
 margin_bottom = 128.0
 rect_clip_content = true
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 text = "zone 3"
 autowrap = true
 
@@ -465,7 +749,7 @@ split_offset = 4
 [node name="icon" type="TextureRect" parent="map/base/tiles/container/zones/item4"]
 margin_right = 132.0
 margin_bottom = 128.0
-texture = ExtResource( 24 )
+texture = ExtResource( 29 )
 
 [node name="description" type="Label" parent="map/base/tiles/container/zones/item4"]
 margin_left = 144.0
@@ -473,7 +757,7 @@ margin_right = 819.0
 margin_bottom = 128.0
 rect_clip_content = true
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 9 )
 text = "zone 4"
 autowrap = true
 
@@ -485,13 +769,13 @@ shadow_enabled = true
 shadow_color = Color( 0.0313726, 0, 0.105882, 1 )
 shadow_contact = 1.29
 
-[node name="sun" parent="." instance=ExtResource( 25 )]
+[node name="sun" parent="." instance=ExtResource( 30 )]
 transform = Transform( 0.996195, -3.89667e-008, 0.0871557, -0.0789899, 0.422618, 0.902859, -0.0368336, -0.906308, 0.42101, 0, 13, 11 )
 visible = false
 
 [node name="Camera" parent="." groups=[
 "cam",
-] instance=ExtResource( 26 )]
+] instance=ExtResource( 31 )]
 current = false
 
 [node name="zone1" type="Spatial" parent="."]
@@ -499,43 +783,41 @@ editor/display_folded = true
 
 [node name="fence" type="MeshInstance" parent="zone1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.32 )
-mesh = ExtResource( 27 )
-material/0 = ExtResource( 28 )
+mesh = ExtResource( 32 )
+material/0 = ExtResource( 33 )
 
-[node name="boss1" parent="zone1" instance=ExtResource( 29 )]
+[node name="boss1" parent="zone1" instance=ExtResource( 34 )]
 transform = Transform( 0.187939, 0, -0.068404, 0, 0.2, 0, 0.068404, 0, 0.187939, 2, 1, 0 )
-script = ExtResource( 30 )
+script = ExtResource( 35 )
 
 [node name="fence2" type="MeshInstance" parent="zone1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0.32 )
-mesh = ExtResource( 27 )
-material/0 = ExtResource( 28 )
+mesh = ExtResource( 32 )
+material/0 = ExtResource( 33 )
 
 [node name="fence3" type="MeshInstance" parent="zone1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0.32 )
-mesh = ExtResource( 27 )
-material/0 = ExtResource( 28 )
+mesh = ExtResource( 32 )
+material/0 = ExtResource( 33 )
 
 [node name="fence4" type="MeshInstance" parent="zone1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0.32 )
-mesh = ExtResource( 27 )
-material/0 = ExtResource( 28 )
+mesh = ExtResource( 32 )
+material/0 = ExtResource( 33 )
 
 [node name="fence5" type="MeshInstance" parent="zone1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0.32 )
-material_override = ExtResource( 28 )
-mesh = ExtResource( 27 )
+material_override = ExtResource( 33 )
+mesh = ExtResource( 32 )
 material/0 = null
 
-[node name="drill" parent="zone1" instance=ExtResource( 31 )]
+[node name="drill" parent="zone1" instance=ExtResource( 36 )]
 transform = Transform( 0.2, 0, 0, 0, 0.24, 0, 0, 0, 0.2, 0, 1.93, 0 )
 visible = false
 
-[node name="auger" parent="zone1" instance=ExtResource( 32 )]
+[node name="auger" parent="zone1" instance=ExtResource( 37 )]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1, 0 )
-script = ExtResource( 33 )
-
-[node name="gradedisplay" parent="." instance=ExtResource( 34 )]
+script = ExtResource( 38 )
 [connection signal="finished" from="AudioStreamPlayer" to="rhythm manager" method="_on_AudioStreamPlayer_finished"]
 [connection signal="animation_finished" from="player/AnimationPlayer" to="rhythm manager" method="_on_AnimationPlayer_animation_finished"]
 

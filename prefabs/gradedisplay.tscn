@@ -10,12 +10,12 @@ anchor_bottom = 0.5
 margin_left = -540.0
 margin_top = -960.0
 margin_right = 540.0
-margin_bottom = 771.0
+margin_bottom = 429.0
 
 [node name="Sprite" type="TextureRect" parent="."]
-margin_left = 390.0
-margin_top = 790.0
-margin_right = 690.0
-margin_bottom = 940.0
+margin_left = 477.0
+margin_top = 658.0
+margin_right = 602.0
+margin_bottom = 730.0
 texture = ExtResource( 1 )
 stretch_mode = 4
